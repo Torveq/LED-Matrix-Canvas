@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [grid, setGrid] = useState(Array(8).fill().map(() => Array(8).fill(null)));
+
+  const handlePixelClick = (row, col) => {
+    console.log(`Clicked: ${row}, ${col}`);
+    // basic toggle logic (for now)
+    const newGrid = grid.map(r => [...r]);
+    newGrid[row][col] = newGrid[row][col] === null ? '#FFFFFF' : null;
+    setGrid(newGrid);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-slate-900 text-white p-8">
+      <h1 className="text-5xl font-bold text-center mb-8">STUMP LED Generator</h1>
+      <div className="flex justify-center">
+        <div className="bg-slate-800 p-4 rounded-xl inline-block select-none">
+          <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
+            {grid.map((row, rowIdx) =>
+              row.map((cell, colIdx) => (
+                <button
+                  key={`${rowIdx}-${colIdx}`}
+                  onClick={() => handlePixelClick(rowIdx, colIdx)}
+                  className="w-12 h-12 rounded border-2 border-slate-700"
+                  style={{ backgroundColor: cell || '#1e293b' }}
+                />
+              ))
+            )}
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    </div>
+  );
+};
+export default App;
