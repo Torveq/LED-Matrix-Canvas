@@ -1,18 +1,25 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { Trash2, X } from 'lucide-react';
 
 const ColorPalette = ({ 
   colorPalette, 
   selectedColor, 
   onSelectColor, 
   onRemoveColor, 
+  onClearGrid,
   rgbToHex 
 }) => {
   return (
     <div className="bg-slate-900/50 rounded-xl p-4 w-full max-w-2xl">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-sm">Color Palette</h3>
-        
+        <button 
+          onClick={onClearGrid} 
+          className="px-3 py-1.5 bg-red-600 hover:bg-red-700 rounded text-xs transition-colors flex items-center gap-1.5"
+        >
+          <Trash2 className="w-3 h-3" />
+          Clear Canvas
+        </button>
       </div>
       <div className="grid grid-cols-8 gap-3">
         {colorPalette.map((color, idx) => {
