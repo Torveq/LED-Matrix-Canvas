@@ -14,14 +14,16 @@ const CodePanel = ({
   onRegisterChange,
   colorRegister,
   onColorRegisterChange,
-  useDefW,
-  onUseDefWChange,
+  pointerRegister,
+  onPointerRegisterChange,
+  dataKeyword,
+  onDataKeywordChange,
   optimizeCode,
   onOptimizeCodeChange
 }) => {
   return (
     <div 
-      className="fixed w-[420px] bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-blue-500/30 z-50 flex flex-col"
+      className="fixed w-[550px] bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-blue-500/30 z-50 flex flex-col"
       style={{ 
         left: `${position.x}px`, 
         top: `${position.y}px`,
@@ -52,7 +54,7 @@ const CodePanel = ({
         <div className="p-6 flex flex-col flex-1 min-h-0">
           {/* Settings */}
           <div className="space-y-4 mb-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm mb-1">Address Register</label>
                 <select
@@ -78,18 +80,33 @@ const CodePanel = ({
                   ))}
                 </select>
               </div>
+
+              <div>
+                <label className="block text-sm mb-1">Pointer Register</label>
+                <select
+                  value={pointerRegister}
+                  onChange={(e) => onPointerRegisterChange(e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 rounded-lg border border-slate-600"
+                >
+                  {['R1', 'R2', 'R3', 'R4', 'R5', 'R6'].map(r => (
+                    <option key={r} value={r}>{r}</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={useDefW}
-                  onChange={(e) => onUseDefWChange(e.target.checked)}
-                  className="w-4 h-4 accent-blue-500"
-                />
-                <span className="text-sm">Use DEFW definitions</span>
-              </label>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-sm mb-1">Data Keyword</label>
+                <select
+                  value={dataKeyword}
+                  onChange={(e) => onDataKeywordChange(e.target.value)}
+                  className="w-full px-3 py-2 bg-slate-700 rounded-lg border border-slate-600"
+                >
+                  <option value="DEFW">DEFW</option>
+                  <option value="DATA">DATA</option>
+                </select>
+              </div>
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -98,13 +115,13 @@ const CodePanel = ({
                   onChange={(e) => onOptimizeCodeChange(e.target.checked)}
                   className="w-4 h-4 accent-blue-500"
                 />
-                <span className="text-sm">Optimize code</span>
+                <span className="text-sm">Optimize code (Max 8 colors)</span>
               </label>
             </div>
           </div>
 
           {/* Generated Code - Scrollable */}
-          <div className="bg-slate-900 rounded-xl p-4 mb-4 font-mono text-xs overflow-y-auto flex-1 min-h-0 max-h-[250px]">
+          <div className="bg-slate-900 rounded-xl p-4 mb-4 font-mono text-sm overflow-y-auto overflow-x-hidden flex-1 min-h-0 max-h-[250px]">
             <pre className="text-green-400 whitespace-pre">{generatedCode}</pre>
           </div>
 
