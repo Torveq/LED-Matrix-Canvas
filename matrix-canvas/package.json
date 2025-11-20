@@ -1,6 +1,6 @@
 {
   "name": "matrix-canvas",
-  "private": true,
+  "homepage": "https://Torveq.github.io/LED-Matrix-Canvas",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

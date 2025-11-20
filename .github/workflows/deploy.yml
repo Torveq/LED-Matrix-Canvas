@@ -50,7 +50,7 @@ jobs:
         # This uploads the 'dist' folder as a GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './matrix-canvas/dist'
 
   # Deployment job
   deploy:
