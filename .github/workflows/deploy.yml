@@ -33,14 +33,17 @@ jobs:
         with:
           node-version: 20 # Use a modern Node.js version
           cache: 'npm' # Cache npm dependencies
+          cache-dependency-path: 'matrix-canvas/package-lock.json'
 
       - name: Install dependencies
+        working-directory: ./matrix-canvas
         run: npm install
       
       # Runs the build script defined in package.json.
       # This MUST create a 'dist' folder.
       # It will use the 'base' path from your vite.config.js
       - name: Build
+        working-directory: ./matrix-canvas
         run: npm run build
 
       - name: Setup Pages
