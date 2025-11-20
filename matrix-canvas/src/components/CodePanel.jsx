@@ -121,7 +121,7 @@ const CodePanel = ({
           </div>
 
           {/* Generated Code - Scrollable */}
-          <div className="bg-slate-900 rounded-xl p-4 mb-4 font-mono text-sm overflow-y-auto overflow-x-hidden flex-1 min-h-0 max-h-[250px]">
+          <div className="bg-slate-900 rounded-xl p-4 mb-4 font-mono text-sm overflow-y-auto flex-1 min-h-0 max-h-[250px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" style={{ overflowX: 'auto' }}>
             <pre className="text-green-400 whitespace-pre">{generatedCode}</pre>
           </div>
 
